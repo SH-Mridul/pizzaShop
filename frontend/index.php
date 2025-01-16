@@ -162,12 +162,12 @@
                <p style="margin: 8px 0; font-size: 16px;">Location: <?= htmlspecialchars($order['location']) ?></p>
 
                <div>
-                  <div style="display: flex; justify-content: space-between; align-items: center; cursor: pointer; margin-top: 16px; font-weight: bold;" onclick="toggleUniqueOrderList()">
+                  <div style="display: flex; justify-content: space-between; align-items: center; cursor: pointer; margin-top: 16px; font-weight: bold;" onclick="toggleUniqueOrderList(<?php echo $order['id']; ?>)">
                      <span>Order List</span>
                      <span id="unique-arrow" style="font-size: 16px;">&#9662;</span>
                   </div>
 
-                  <ul id="uniqueOrderItems" style="list-style: none; padding: 0; margin: 16px 0 0; display: none;">
+                  <ul id="uniqueOrderItems<?php echo $order['id']; ?>" style="list-style: none; padding: 0; margin: 16px 0 0; display: none;">
                   <?php foreach ($order['products'] as $product): ?>   
                   <li style="display: flex; justify-content: space-between; padding: 8px; border-bottom: 1px solid #ddd;">
                         <span>Item Name: <?= htmlspecialchars($product['product_name']) ?></span>
@@ -612,8 +612,8 @@
 <script src="js/script.js"></script>
 
 <script>
-   function toggleUniqueOrderList() {
-      const orderItems = document.getElementById('uniqueOrderItems');
+   function toggleUniqueOrderList(id) {
+      const orderItems = document.getElementById('uniqueOrderItems'+id);
       const arrow = document.getElementById('unique-arrow');
 
       if (orderItems.style.display === 'none' || orderItems.style.display === '') {
